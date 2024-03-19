@@ -1,25 +1,21 @@
-import connectdb from '../server/db/connectdb.js'
-import authRouter from './routes/authRouter.js'
+import http from "http";
+import SocketService from "./services/socket.js"
+// import { startMessageConsumer } from "./services/kafka";
 
-import express from 'express'
-import dotenv from 'dotenv'
+async function init() {
+//   startMessageConsumer();
+  const socketService = new SocketService();
 
-dotenv.config()
-const app = express()
+  const httpServer = http.createServer();
+  const PORT = process.env.PORT ? process.env.PORT : 8000;
 
-app.use(express.json())
+  socketService.io.attach(httpServer);
 
-const PORT = process.env.PORT || 5000
+  httpServer.listen(PORT, () =>
+    console.log(`HTTP Server started at PORT:${PORT}`)
+  );
 
-// app.get("/", (req,res) => {
-//     res.send("Hello")
-// })
+  socketService.initListeners();
+}
 
-app.use("/api/auth", authRouter);
-// app.use("/api/messages", messageRoutes);
-// app.use("/api/users", userRoutes);
-
-app.listen(PORT, () => {
-    connectdb()
-    console.log("Server on port `{$PORT}`")
-})
+init();
