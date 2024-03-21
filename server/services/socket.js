@@ -1,19 +1,19 @@
 import { Server } from "socket.io";
-// import Redis from "ioredis";
+import Redis from "ioredis";
 
-// const pub = new Redis({
-//   host: "",
-//   port: 0,
-//   username: "default",
-//   password: "",
-// });
+const pub = new Redis({
+  host: "",
+  port: 0,
+  username: "default",
+  password: "",
+});
 
-// const sub = new Redis({
-//   host: "",
-//   port: 0,
-//   username: "",
-//   password: "",
-// });
+const sub = new Redis({
+  host: "",
+  port: 0,
+  username: "",
+  password: "",
+});
 
 class SocketService {
   constructor() {
@@ -39,14 +39,14 @@ class SocketService {
       });
     });
 
-    // sub.on("message", async (channel, message) => {
-    //   if (channel === "MESSAGES") {
-    //     console.log("new message from redis", message);
-    //     io.emit("message", message);
-    //     await produceMessage(message);
-    //     console.log("Message Produced to Kafka Broker");
-    //   }
-    // });
+    sub.on("message", async (channel, message) => {
+      if (channel === "MESSAGES") {
+        console.log("new message from redis", message);
+        io.emit("message", message);
+        await produceMessage(message);
+        console.log("Message Produced to Kafka Broker");
+      }
+    });
   }
 
   

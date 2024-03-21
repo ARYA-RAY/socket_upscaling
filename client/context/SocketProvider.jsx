@@ -15,8 +15,7 @@ export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState();
   const [messages, setMessages] = useState([]);
 
-  const sendMessage = useCallback(
-    (msg) => {
+  const sendMessage = useCallback((msg) => {
       console.log("Send Message", msg);
       if (socket) {
         socket.emit("event:message", { message: msg });
