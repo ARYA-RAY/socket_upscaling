@@ -2,17 +2,15 @@ import { Server } from "socket.io";
 import Redis from "ioredis";
 
 const pub = new Redis({
-  host: "",
-  port: 0,
-  username: "default",
-  password: "",
+  host: "127.0.0.1",
+  port: 6379,
+  password: "pub123",
 });
 
 const sub = new Redis({
-  host: "",
-  port: 0,
-  username: "",
-  password: "",
+  host: "127.0.0.1",
+  port: 6379,
+  password: "sub123",
 });
 
 class SocketService {
@@ -24,7 +22,7 @@ class SocketService {
         origin: "*",
       },
     });
-    // sub.subscribe("MESSAGES");
+    sub.subscribe("MESSAGES");
   }
 
   initListeners() {
@@ -35,7 +33,7 @@ class SocketService {
       console.log(`New Socket Connected`, socket.id);
       socket.on("event:message", async ({ message }) => {
         console.log("New Message Rec.", message);
-        // await pub.publish("MESSAGES", JSON.stringify({ message }));
+        await pub.publish("MESSAGES", JSON.stringify({ message }));
       });
     });
 
@@ -43,13 +41,11 @@ class SocketService {
       if (channel === "MESSAGES") {
         console.log("new message from redis", message);
         io.emit("message", message);
-        await produceMessage(message);
-        console.log("Message Produced to Kafka Broker");
+        // await produceMessage(message);
+        // console.log("Message Produced to Kafka Broker");
       }
     });
   }
-
-  
 
   get io() {
     return this._io;
