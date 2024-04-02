@@ -10,7 +10,7 @@ const Chat = () => {
   
     return (
       <div>
-        <div>
+        <div className=''>
           <input
             onChange={(e) => setMessage(e.target.value)}
             className={classes["chat-input"]}
