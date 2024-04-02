@@ -10,6 +10,11 @@ const Chat = () => {
   
     return (
       <div>
+       <div>
+          {messages.map((e) => (
+            <li>{e}</li>
+          ))}
+        </div>
         <div>
           <input
             onChange={(e) => setMessage(e.target.value)}
@@ -23,11 +28,7 @@ const Chat = () => {
             Send
           </button>
         </div>
-        <div>
-          {messages.map((e) => (
-            <li>{e}</li>
-          ))}
-        </div>
+        
       </div>
     );
 }
