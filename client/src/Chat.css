@@ -1,0 +1,53 @@
+#msg{
+    width: 80%;
+    margin-right: 7px;
+    margin-bottom:30px;
+    margin-top: 12px;
+    text-overflow: clip;
+}
+
+.Hello{
+  font-family: cursive;
+  font-size: 40px;
+  color: gray;
+  
+}
+
+.hello{
+    height: 60vh;
+    overflow:auto;
+    width: 100vw;
+    margin-top: 20px;
+    box-sizing: border-box;
+    margin-top: 17px;
+    word-wrap: break-word;
+}
+
+.printer{
+    width: 100vw;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.printer .hel{
+    box-shadow: 5px 5px 3px 3px;
+    text-align: center;
+}
+
+.msg{
+  margin-bottom: 2px;
+  margin-top: 50px;   
+}
+
+.neww{
+    background-color: white;
+    color: black;
+    box-shadow: 12px 12px 3px 5px;
+    text-align: center;
+}
+
+.ti{
+    font-size: 7px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-left: auto;
+}
